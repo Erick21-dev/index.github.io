@@ -1,116 +1,303 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Dentista - Uniodonto</title>
+  <title>Clínica Odontológica</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      height: 100vh;
+      margin: 0;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #800029; /* cor da logo */
+      background: #f8f9fa;
     }
 
-    .card {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      width: 350px;
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: #80002a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      z-index: 1000;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+
+    header img {
+      height: 90px;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 220px;
+      background: #80002a;
+      color: white;
+      height: 100vh;
+      padding: 90px 20px 20px; 
+      box-sizing: border-box;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    .sidebar ul li {
+      margin: 15px 0;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .sidebar ul li a:hover {
+      color: #ffd700;
+    }
+
+    /* CONTEÚDO */
+    .content {
+      flex: 1;
+      margin-left: 220px; 
+      padding: 100px 30px 30px; 
+    }
+
+    .section {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    .section h3 {
+      margin-bottom: 15px;
+      color: #80002a;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 10px;
       text-align: center;
     }
 
-    .card img {
-      width: 90px;
-      margin-bottom: 10px;
+    table th {
+      background: #80002a;
+      color: white;
     }
 
-    .card h2 {
-      color: #800029;
-      margin-bottom: 20px;
+    .available {
+      color: green;
+      font-weight: bold;
     }
 
-    .card input {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      font-size: 14px;
+    .occupied {
+      color: red;
+      font-weight: bold;
     }
 
-    .card button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      background: #800029;
-      color: #fff;
+    /* BOTÃO */
+    .btn {
+      display: inline-block;
+      background: #80002a;
+      color: white;
+      padding: 10px 20px;
+      margin-bottom: 15px;
       border: none;
-      border-radius: 12px;
-      font-size: 16px;
+      border-radius: 6px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      font-weight: bold;
+      transition: 0.3s;
     }
 
-    .card button:hover {
-      background: #a0003a;
+    .btn:hover {
+      background: #a00035;
     }
 
-    .card p {
+    /* FORMULÁRIO */
+    #formConsulta {
+      display: none;
       margin-top: 15px;
-      font-size: 14px;
-      color: #555;
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 8px;
     }
 
-    .card a {
-      color: #800029;
-      text-decoration: none;
+    #formConsulta input {
+      margin: 5px 0;
+      padding: 8px;
+      width: calc(100% - 16px);
     }
 
-    .card a:hover {
-      text-decoration: underline;
+    #formConsulta button {
+      margin-top: 10px;
+      width: 100%;
     }
   </style>
 </head>
 <body>
-  <div class="card">
+ 
+  <header>
     <img src="unidonto.png.png" alt="Logo Uniodonto">
-    <h2>Login Dentista</h2>
-    
-    <form onsubmit="return validarLogin(event)">
-      <input type="Usuário" id="Usuário" placeholder="Usuário" required>
-      <input type="senha" id="senha" placeholder="Senha" required>
-      <button type="submit">Entrar</button>
-    </form>
-    <p>
-      Esqueceu a senha? <a href="#">Recuperar</a>
-    </p>
+  </header>
+
+  <!-- MENU -->
+  <div class="sidebar">
+    <ul>
+      <li><a href="#consultas">Consultas</a></li>
+      <li><a href="#salas">Salas</a></li>
+      <li><a href="#outros">Mais</a></li>
+    </ul>
   </div>
 
-  <script>
-    function validarLogin(event) {
-      event.preventDefault(); 
+  <!-- CONTEÚDO -->
+  <div class="content">
+    <!-- CONSULTAS -->
+    <div id="consultas" class="section">
+      <h3>Consultas Marcadas</h3>
       
-     
-      const Usuário = document.getElementById("Usuário").value;
-      const senha = document.getElementById("senha").value;
+      <!-- Botão -->
+      <button class="btn" onclick="toggleForm()">➕ Adicionar Consulta</button>
+      
+      <!-- Formulário -->
+      <div id="formConsulta">
+        <input type="text" id="paciente" placeholder="Nome do Paciente">
+        <input type="date" id="data">
+        <input type="time" id="hora">
+        <input type="text" id="dentista" placeholder="Dentista">
+        <button class="btn" onclick="adicionarConsulta()">Salvar</button>
+      </div>
 
-     
-      const usuarioCorreto = "admin";
-      const senhaCorreta = "123456";
+      <!-- Tabela -->
+      <table id="tabelaConsultas">
+        <tr>
+          <th>Paciente</th>
+          <th>Data</th>
+          <th>Hora</th>
+          <th>Dentista</th>
+        </tr>
+        <tr>
+          <td>Maria Silva</td>
+          <td>17/11/2025</td>
+          <td>10:00</td>
+          <td>Dr. João</td>
+        </tr>
+        <tr>
+          <td>Mateus Santos</td>
+          <td>10/11/2025</td>
+          <td>14:30</td>
+          <td>Dra. Dayane</td>
+        </tr>
+        <tr>
+          <td>Ana Claudia</td>
+          <td>07/11/2025</td>
+          <td>13:20</td>
+          <td>Dra. Natalia</td>
+        </tr>
+        <tr>
+          <td>Fernando Carvalho</td>
+          <td>24/11/2025</td>
+          <td>15:30</td>
+          <td>Dr. Nycollas</td>
+        </tr>
+        <tr>
+          <td>Carlos Souza</td>
+          <td>18/11/2025</td>
+          <td>08:30</td>
+          <td>Dr. Kaiky</td>
+        </tr>
+      </table>
+    </div>
 
-      if (Usuário === usuarioCorreto && senha === senhaCorreta) {
-        
-        window.location.href = "site/https://erick21-dev.github.io/home-dentista/";
+    
+    <div id="salas" class="section">
+      <h3>Salas Disponíveis</h3>
+      <table>
+        <tr>
+          <th>Sala</th>
+          <th>Status</th>
+        </tr>
+        <tr>
+          <td>Sala 1</td>
+          <td class="occupied">Ocupada</td>
+        </tr>
+        <tr>
+          <td>Sala 2</td>
+          <td class="available">Disponível</td>
+        </tr>
+        <tr>
+          <td>Sala 3</td>
+          <td class="occupied">Ocupada</td>
+        </tr>
+        <tr>
+          <td>Sala 4</td>
+          <td class="available">Disponível</td>
+        </tr>
+        <tr>
+          <td>Sala 5</td>
+          <td class="occupied">Ocupada</td>
+        </tr>
+      </table>
+    </div>
+
+    
+    <div id="outros" class="section">
+      <h3>Outras Informações</h3>
+      <p>📌 Atendimento de segunda a sexta, das 08h às 18h.</p>
+      <p>Dr. João, especialista em Prótese</p>
+      <p>Dra. Dayane, especialista em Ortodontia</p>
+      <p>Dra. Natalia, especialista em geral</p>
+      <p>Dr. Nycollas, especialista em Implantes</p>
+      <p>Dr. Kaiky, especialista em Estética</p>
+    </div>
+  </div>
+
+  
+  <script>
+    function toggleForm() {
+      const form = document.getElementById('formConsulta');
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function adicionarConsulta() {
+      const paciente = document.getElementById('paciente').value;
+      const data = document.getElementById('data').value;
+      const hora = document.getElementById('hora').value;
+      const dentista = document.getElementById('dentista').value;
+
+      if (paciente && data && hora && dentista) {
+        const tabela = document.getElementById('tabelaConsultas');
+        const novaLinha = tabela.insertRow(-1);
+
+        novaLinha.insertCell(0).textContent = paciente;
+        novaLinha.insertCell(1).textContent = data.split('-').reverse().join('/');
+        novaLinha.insertCell(2).textContent = hora;
+        novaLinha.insertCell(3).textContent = dentista;
+
+        document.getElementById('formConsulta').reset;
+        toggleForm();
       } else {
-        alert("Usuário ou senha incorretos!");
+        alert("Preencha todos os campos!");
       }
     }
   </script>
 </body>
 </html>
-
